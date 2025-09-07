@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import AdminHeader from './AdminHeader';
+import useScrollToTop from '../../../hooks/useScrollToTop';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Automatically scroll to top when route changes
+  useScrollToTop({ smooth: true, delay: 100 });
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

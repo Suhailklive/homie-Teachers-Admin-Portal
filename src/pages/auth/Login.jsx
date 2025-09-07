@@ -99,18 +99,84 @@ const Login = () => {
         <div className="login-overlay"></div>
       </div>
       
-      <div className="login-content">
-        <div className="login-card">
-          <div className="login-header">
-            <div className="login-logo">
-              <div className="logo-icon">📚</div>
-              <h1>Teachers Portal</h1>
-            </div>
-            <p className="login-subtitle">
-              Welcome to the Educational Management System
-            </p>
+      <div className="login-left-section">
+        <div className="login-branding">
+          <div className="login-logo">
+            <div className="logo-icon">📚</div>
+            <h1>Teachers Portal</h1>
           </div>
+          <p className="login-subtitle">
+            Welcome to the Educational Management System
+          </p>
+        </div>
+        
+        {/* Demo Credentials Display */}
+        <div className="demo-credentials">
+          <div className="demo-header">
+            <span className="demo-badge">LOGIN</span>
+            <span className="demo-text">Use these credentials for testing</span>
+          </div>
+          
+          <div className="credentials-grid">
+            <div className={`credential-card ${activeTab === 'teacher' ? 'active' : ''}`}>
+              <h4>👩‍🏫 Teacher Login</h4>
+              <div className="credential-item">
+                <span>Username:</span>
+                <code onClick={() => copyToClipboard(demoCredentials.teacher.username)}>
+                  {demoCredentials.teacher.username}
+                </code>
+              </div>
+              <div className="credential-item">
+                <span>Password:</span>
+                <code onClick={() => copyToClipboard(demoCredentials.teacher.password)}>
+                  {demoCredentials.teacher.password}
+                </code>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => handleDemoLogin('teacher')}
+                disabled={isSubmitting}
+              >
+                Quick Login
+              </Button>
+            </div>
 
+            <div className={`credential-card ${activeTab === 'admin' ? 'active' : ''}`}>
+              <h4>👨‍💼 Admin Login</h4>
+              <div className="credential-item">
+                <span>Username:</span>
+                <code onClick={() => copyToClipboard(demoCredentials.admin.username)}>
+                  {demoCredentials.admin.username}
+                </code>
+              </div>
+              <div className="credential-item">
+                <span>Password:</span>
+                <code onClick={() => copyToClipboard(demoCredentials.admin.password)}>
+                  {demoCredentials.admin.password}
+                </code>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => handleDemoLogin('admin')}
+                disabled={isSubmitting}
+              >
+                Quick Login
+              </Button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="demo-note-section">
+          <p className="demo-note">
+            🎯 This application showcases the core features of the platform for Teachers and Admin Portal
+          </p>
+        </div>
+      </div>
+      
+      <div className="login-right-section">
+        <div className="login-card">
           {/* Role Tabs */}
           <div className="login-tabs">
             <button 
@@ -129,63 +195,7 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Demo Credentials Display */}
-          <div className="demo-credentials">
-            <div className="demo-header">
-              <span className="demo-badge">DEMO</span>
-              <span className="demo-text">Use these credentials for testing</span>
-            </div>
-            
-            <div className="credentials-grid">
-              <div className={`credential-card ${activeTab === 'teacher' ? 'active' : ''}`}>
-                <h4>👩‍🏫 Teacher Demo</h4>
-                <div className="credential-item">
-                  <span>Username:</span>
-                  <code onClick={() => copyToClipboard(demoCredentials.teacher.username)}>
-                    {demoCredentials.teacher.username}
-                  </code>
-                </div>
-                <div className="credential-item">
-                  <span>Password:</span>
-                  <code onClick={() => copyToClipboard(demoCredentials.teacher.password)}>
-                    {demoCredentials.teacher.password}
-                  </code>
-                </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => handleDemoLogin('teacher')}
-                  disabled={isSubmitting}
-                >
-                  Quick Login
-                </Button>
-              </div>
 
-              <div className={`credential-card ${activeTab === 'admin' ? 'active' : ''}`}>
-                <h4>👨‍💼 Admin Demo</h4>
-                <div className="credential-item">
-                  <span>Username:</span>
-                  <code onClick={() => copyToClipboard(demoCredentials.admin.username)}>
-                    {demoCredentials.admin.username}
-                  </code>
-                </div>
-                <div className="credential-item">
-                  <span>Password:</span>
-                  <code onClick={() => copyToClipboard(demoCredentials.admin.password)}>
-                    {demoCredentials.admin.password}
-                  </code>
-                </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => handleDemoLogin('admin')}
-                  disabled={isSubmitting}
-                >
-                  Quick Login
-                </Button>
-              </div>
-            </div>
-          </div>
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="login-form">
@@ -231,11 +241,6 @@ const Login = () => {
             </Button>
           </form>
 
-          <div className="login-footer">
-            <p className="demo-note">
-              🎯 This is a demo application with mock data for educational purposes.
-            </p>
-          </div>
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ import {
   PieChart,
   Activity
 } from 'lucide-react';
+import { scrollToTop } from '../../utils/scrollUtils';
 import './Reports.css';
 
 const Reports = () => {
@@ -27,6 +28,12 @@ const Reports = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState('month');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedReports, setSelectedReports] = useState([]);
+
+  const handleTabChange = (newTab) => {
+    setActiveTab(newTab);
+    // Scroll to top when switching tabs
+    scrollToTop({ delay: 100 });
+  };
 
   // Mock data for reports
   const reportCategories = [
@@ -294,28 +301,28 @@ const Reports = () => {
       <div className="reports-tabs">
         <button 
           className={`tab-button ${activeTab === 'overview' ? 'active' : ''}`}
-          onClick={() => setActiveTab('overview')}
+          onClick={() => handleTabChange('overview')}
         >
           <BarChart3 size={16} />
           Overview
         </button>
         <button 
           className={`tab-button ${activeTab === 'reports' ? 'active' : ''}`}
-          onClick={() => setActiveTab('reports')}
+          onClick={() => handleTabChange('reports')}
         >
           <FileText size={16} />
           All Reports
         </button>
         <button 
           className={`tab-button ${activeTab === 'categories' ? 'active' : ''}`}
-          onClick={() => setActiveTab('categories')}
+          onClick={() => handleTabChange('categories')}
         >
           <PieChart size={16} />
           Categories
         </button>
         <button 
           className={`tab-button ${activeTab === 'activity' ? 'active' : ''}`}
-          onClick={() => setActiveTab('activity')}
+          onClick={() => handleTabChange('activity')}
         >
           <Activity size={16} />
           Recent Activity

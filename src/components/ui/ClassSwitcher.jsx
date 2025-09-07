@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, Grid3X3, BookOpen, Users, ArrowLeft } from 'lucide-react';
 import { useClass } from '../../contexts/ClassContext';
+import { scrollToTop } from '../../utils/scrollUtils';
 import './ClassSwitcher.css';
 
 const ClassSwitcher = () => {
@@ -10,11 +11,15 @@ const ClassSwitcher = () => {
   const handleClassSelect = (classItem) => {
     selectClass(classItem.id);
     setIsDropdownOpen(false);
+    // Scroll to top when switching classes
+    scrollToTop({ delay: 100 });
   };
 
   const handleOverviewSelect = () => {
     goToOverview();
     setIsDropdownOpen(false);
+    // Scroll to top when switching to overview
+    scrollToTop({ delay: 100 });
   };
 
   const getSubjectIcon = (subject) => {

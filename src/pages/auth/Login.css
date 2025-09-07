@@ -1,13 +1,11 @@
 /* Login Page Styles */
 
 .login-container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: var(--spacing-lg, 24px);
+  overflow: hidden;
 }
 
 .login-background {
@@ -42,6 +40,32 @@
   max-width: 480px;
 }
 
+/* Left Section */
+.login-left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--spacing-xl, 32px);
+  position: relative;
+  z-index: 2;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Right Section */
+.login-right-section {
+  width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl, 32px);
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
 .login-card {
   background: var(--white, #ffffff);
   border-radius: var(--radius-xl, 16px);
@@ -51,15 +75,17 @@
   padding: var(--spacing-xl, 32px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 400px;
 }
 
-/* Login Header */
-.login-header {
+/* Login Branding */
+.login-branding {
   text-align: center;
   margin-bottom: var(--spacing-xl, 32px);
 }
 
-.login-logo {
+.login-branding .login-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,26 +93,42 @@
   margin-bottom: var(--spacing-md);
 }
 
-.logo-icon {
-  font-size: 3rem;
+.login-branding .logo-icon {
+  font-size: 4rem;
   margin-bottom: var(--spacing-xs);
 }
 
-.login-header h1 {
-  font-size: var(--font-size-2xl, 24px);
+.login-branding h1 {
+  font-size: var(--font-size-3xl, 30px);
   font-weight: var(--font-weight-bold, 700);
-  color: var(--text-primary, #111827);
+  color: var(--white, #ffffff);
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-subtitle {
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
+.login-branding .login-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-lg, 18px);
   margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Demo Note Section */
+.demo-note-section {
+  text-align: center;
+  margin-top: var(--spacing-xl, 32px);
+}
+
+.demo-note-section .demo-note {
+  font-size: var(--font-size-sm, 14px);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.1);
+  padding: var(--spacing-md, 16px);
+  border-radius: var(--radius-lg, 12px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Login Tabs */
@@ -131,13 +173,14 @@
   font-size: var(--font-size-lg);
 }
 
-/* Demo Credentials */
+/* Demo Credentials - Updated for Left Section */
 .demo-credentials {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 2px dashed var(--border);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px dashed rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  backdrop-filter: blur(10px);
 }
 
 .demo-header {
@@ -159,7 +202,7 @@
 
 .demo-text {
   font-size: var(--font-size-sm);
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: var(--font-weight-medium);
 }
 
@@ -170,13 +213,14 @@
 }
 
 .credential-card {
-  background: var(--white);
-  border: 2px solid var(--gray-200);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .credential-card::before {
@@ -197,14 +241,16 @@
 }
 
 .credential-card:hover {
-  border-color: var(--primary-blue);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 1);
 }
 
 .credential-card.active {
   border-color: var(--primary-blue);
-  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 }
 
 .credential-card h4 {
@@ -291,56 +337,74 @@
   }
 }
 
-/* Login Footer */
-.login-footer {
-  text-align: center;
-  padding-top: var(--spacing-lg);
-  border-top: 1px solid var(--border);
-}
 
-.demo-note {
-  font-size: var(--font-size-xs);
-  color: var(--text-muted);
-  margin: 0;
-  line-height: 1.5;
-}
 
 /* Responsive Design */
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .login-container {
+    flex-direction: column;
+  }
+  
+  .login-left-section {
+    flex: none;
+    height: 60vh;
+    padding: var(--spacing-lg);
+  }
+  
+  .login-right-section {
+    width: 100%;
+    height: 40vh;
+    padding: var(--spacing-lg);
+  }
+  
+  .login-branding .logo-icon {
+    font-size: 3rem;
+  }
+  
+  .login-branding h1 {
+    font-size: var(--font-size-2xl, 24px);
+  }
+}
+
+@media (max-width: 768px) {
+  .login-left-section {
+    height: 50vh;
     padding: var(--spacing-md);
   }
   
-  .login-card {
-    padding: var(--spacing-lg);
+  .login-right-section {
+    height: 50vh;
+    padding: var(--spacing-md);
   }
   
   .credentials-grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
   
-  .tab-button {
-    flex-direction: column;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-sm);
-  }
-  
-  .tab-icon {
-    font-size: var(--font-size-md);
-  }
-  
-  .login-header h1 {
-    font-size: var(--font-size-xl);
-  }
-  
-  .demo-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
+  .login-card {
+    padding: var(--spacing-lg);
+    max-width: none;
   }
 }
 
 @media (max-width: 480px) {
+  .login-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .login-left-section {
+    height: 45vh;
+    padding: var(--spacing-sm);
+    overflow-y: auto;
+  }
+  
+  .login-right-section {
+    height: 55vh;
+    padding: var(--spacing-sm);
+  }
+  
   .credential-card {
     padding: var(--spacing-sm);
   }
@@ -354,6 +418,34 @@
   .credential-item code {
     align-self: stretch;
     text-align: center;
+  }
+  
+  .tab-button {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm);
+  }
+  
+  .tab-icon {
+    font-size: var(--font-size-md);
+  }
+  
+  .demo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+  
+  .login-branding .logo-icon {
+    font-size: 2.5rem;
+  }
+  
+  .login-branding h1 {
+    font-size: var(--font-size-xl, 20px);
+  }
+  
+  .demo-credentials {
+    margin-bottom: var(--spacing-md);
   }
 }
 

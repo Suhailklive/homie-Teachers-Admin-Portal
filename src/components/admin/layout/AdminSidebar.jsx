@@ -15,6 +15,7 @@ import {
   ChevronRight,
   ChevronDown
 } from 'lucide-react';
+import { scrollToTop } from '../../../utils/scrollUtils';
 import './AdminSidebar.css';
 
 const AdminSidebar = ({ isOpen }) => {
@@ -144,6 +145,8 @@ const AdminSidebar = ({ isOpen }) => {
   const handleNavigation = (path) => {
     if (path) {
       navigate(path);
+      // Scroll to top when navigating
+      scrollToTop({ delay: 150 });
     }
   };
 

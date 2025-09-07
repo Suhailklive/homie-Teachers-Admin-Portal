@@ -31,6 +31,7 @@ import {
   Mail,
   Target
 } from 'lucide-react';
+import { scrollToTop } from '../../utils/scrollUtils';
 import './Sidebar.css';
 
 const Sidebar = ({ activeItem, onItemClick }) => {
@@ -106,6 +107,8 @@ const Sidebar = ({ activeItem, onItemClick }) => {
     } else {
       // Handle navigation items
       onItemClick?.(item.id, item.path);
+      // Scroll to top when navigating
+      scrollToTop({ delay: 150 });
     }
   };
 

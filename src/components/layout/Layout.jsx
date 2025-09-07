@@ -3,12 +3,16 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Breadcrumb from '../common/Breadcrumb';
+import useScrollToTop from '../../hooks/useScrollToTop';
 import './Layout.css';
 
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Automatically scroll to top when route changes
+  useScrollToTop({ smooth: true, delay: 100 });
 
   // Get active menu item from current route
   const getActiveMenuItem = () => {
