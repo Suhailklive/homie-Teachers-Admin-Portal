@@ -13,7 +13,10 @@ import {
   BookOpen,
   Settings,
   Play,
-  Save
+  Save,
+  FileDown,
+  Sparkles,
+  Copy
 } from 'lucide-react';
 import { Card, Button, Input } from '../../components/ui';
 import './AITools.css';
@@ -26,6 +29,16 @@ const AITools = () => {
     difficulty: 'medium',
     questionType: 'mcq',
     count: 10
+  });
+  const [summarizerSettings, setSummarizerSettings] = useState({
+    subject: 'Physics',
+    chapter: 'Light and Reflection',
+    summaryType: 'comprehensive',
+    length: 'medium',
+    includeKeyPoints: true,
+    includeExamples: true,
+    includeFormulas: true,
+    includeDiagrams: false
   });
 
   // Mock data for AI tools
@@ -53,6 +66,14 @@ const AITools = () => {
       icon: Edit3,
       color: 'purple',
       features: ['Template library', 'Rubric generator', 'Due date management', 'Auto distribution']
+    },
+    {
+      id: 'chapter-summarizer',
+      title: 'Chapter Summarizer',
+      description: 'AI-powered summarization of chapters, topics, and learning materials',
+      icon: Brain,
+      color: 'orange',
+      features: ['Key concepts', 'Student-friendly language', 'Multiple formats', 'Customizable length']
     }
   ];
 
@@ -83,6 +104,39 @@ const AITools = () => {
       difficulty: 'Hard',
       date: '2024-01-13',
       status: 'draft'
+    }
+  ];
+
+  const recentSummaries = [
+    {
+      id: 1,
+      title: 'Light and Reflection - Key Concepts',
+      type: 'Comprehensive',
+      subject: 'Physics',
+      length: 'Medium',
+      date: '2024-01-15',
+      status: 'completed',
+      wordsCount: 450
+    },
+    {
+      id: 2,
+      title: 'Solar System Overview',
+      type: 'Student Notes',
+      subject: 'Physics',
+      length: 'Short',
+      date: '2024-01-14',
+      status: 'completed',
+      wordsCount: 250
+    },
+    {
+      id: 3,
+      title: 'Motion and Forces Summary',
+      type: 'Teaching Notes',
+      subject: 'Physics',
+      length: 'Long',
+      date: '2024-01-13',
+      status: 'draft',
+      wordsCount: 680
     }
   ];
 
@@ -524,6 +578,280 @@ const AITools = () => {
     </div>
   );
 
+  const renderChapterSummarizer = () => (
+    <div className="ai-tool-content">
+      <div className="tool-header">
+        <div className="tool-title-section">
+          <h2>Chapter Summarizer</h2>
+          <p>AI-powered summarization of any chapter, topic, or learning material</p>
+        </div>
+        <Button variant="primary" icon={<Sparkles size={16} />}>
+          Generate Summary
+        </Button>
+      </div>
+
+      <div className="generator-layout">
+        {/* Settings Panel */}
+        <Card className="generator-settings">
+          <div className="card-header">
+            <h3>Summarization Settings</h3>
+            <Button size="sm" variant="ghost" icon={<Settings size={16} />}>
+              Advanced
+            </Button>
+          </div>
+          <div className="settings-form">
+            <div className="form-group">
+              <label>Subject</label>
+              <select 
+                value={summarizerSettings.subject}
+                onChange={(e) => setSummarizerSettings(prev => ({...prev, subject: e.target.value}))}
+                className="form-select"
+              >
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Biology">Biology</option>
+                <option value="History">History</option>
+                <option value="Geography">Geography</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Chapter/Topic</label>
+              <select 
+                value={summarizerSettings.chapter}
+                onChange={(e) => setSummarizerSettings(prev => ({...prev, chapter: e.target.value}))}
+                className="form-select"
+              >
+                <option value="Light and Reflection">Light and Reflection</option>
+                <option value="Solar System">Solar System</option>
+                <option value="Motion and Forces">Motion and Forces</option>
+                <option value="Electricity and Magnetism">Electricity and Magnetism</option>
+                <option value="Waves and Sound">Waves and Sound</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Summary Type</label>
+              <div className="radio-group">
+                <label className="radio-option">
+                  <input 
+                    type="radio" 
+                    name="summaryType" 
+                    value="comprehensive"
+                    checked={summarizerSettings.summaryType === 'comprehensive'}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, summaryType: e.target.value}))}
+                  />
+                  Comprehensive Overview
+                </label>
+                <label className="radio-option">
+                  <input 
+                    type="radio" 
+                    name="summaryType" 
+                    value="student-notes"
+                    checked={summarizerSettings.summaryType === 'student-notes'}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, summaryType: e.target.value}))}
+                  />
+                  Student-Friendly Notes
+                </label>
+                <label className="radio-option">
+                  <input 
+                    type="radio" 
+                    name="summaryType" 
+                    value="teaching-guide"
+                    checked={summarizerSettings.summaryType === 'teaching-guide'}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, summaryType: e.target.value}))}
+                  />
+                  Teaching Guide
+                </label>
+                <label className="radio-option">
+                  <input 
+                    type="radio" 
+                    name="summaryType" 
+                    value="exam-prep"
+                    checked={summarizerSettings.summaryType === 'exam-prep'}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, summaryType: e.target.value}))}
+                  />
+                  Exam Preparation
+                </label>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Summary Length</label>
+              <div className="difficulty-selector">
+                {['short', 'medium', 'long'].map(length => (
+                  <button
+                    key={length}
+                    className={`difficulty-btn ${summarizerSettings.length === length ? 'active' : ''}`}
+                    onClick={() => setSummarizerSettings(prev => ({...prev, length: length}))}
+                  >
+                    {length.charAt(0).toUpperCase() + length.slice(1)}
+                    <span className="length-indicator">
+                      {length === 'short' && '200-300 words'}
+                      {length === 'medium' && '400-600 words'}
+                      {length === 'long' && '700-1000 words'}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Include Options</label>
+              <div className="checkbox-group">
+                <label className="checkbox-option">
+                  <input 
+                    type="checkbox" 
+                    checked={summarizerSettings.includeKeyPoints}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, includeKeyPoints: e.target.checked}))}
+                  />
+                  Key Learning Points
+                </label>
+                <label className="checkbox-option">
+                  <input 
+                    type="checkbox" 
+                    checked={summarizerSettings.includeExamples}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, includeExamples: e.target.checked}))}
+                  />
+                  Real-world Examples
+                </label>
+                <label className="checkbox-option">
+                  <input 
+                    type="checkbox" 
+                    checked={summarizerSettings.includeFormulas}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, includeFormulas: e.target.checked}))}
+                  />
+                  Important Formulas
+                </label>
+                <label className="checkbox-option">
+                  <input 
+                    type="checkbox" 
+                    checked={summarizerSettings.includeDiagrams}
+                    onChange={(e) => setSummarizerSettings(prev => ({...prev, includeDiagrams: e.target.checked}))}
+                  />
+                  Diagram Descriptions
+                </label>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Preview Panel */}
+        <Card className="generator-preview summarizer-preview">
+          <div className="card-header">
+            <h3>Summary Preview</h3>
+            <div className="preview-actions">
+              <Button size="sm" variant="ghost" icon={<Copy size={16} />}>
+                Copy
+              </Button>
+              <Button size="sm" variant="ghost" icon={<Save size={16} />}>
+                Save Draft
+              </Button>
+              <Button size="sm" variant="secondary" icon={<Download size={16} />}>
+                Export PDF
+              </Button>
+            </div>
+          </div>
+          <div className="preview-content">
+            <div className="summary-preview">
+              <div className="summary-header">
+                <h4>Light and Reflection - Comprehensive Overview</h4>
+                <div className="summary-meta">
+                  <span className="word-count">~450 words</span>
+                  <span className="reading-time">3 min read</span>
+                  <span className="summary-type">Comprehensive</span>
+                </div>
+              </div>
+              
+              <div className="summary-content">
+                <div className="summary-section">
+                  <h5>🔍 Key Concepts</h5>
+                  <p>Light is a form of electromagnetic radiation that enables us to see objects around us. When light falls on surfaces, it can be reflected, refracted, or absorbed...</p>
+                </div>
+                
+                <div className="summary-section">
+                  <h5>📚 Important Laws</h5>
+                  <ul>
+                    <li><strong>Law of Reflection:</strong> The angle of incidence equals the angle of reflection</li>
+                    <li><strong>Refraction:</strong> Light bends when passing from one medium to another</li>
+                    <li><strong>Total Internal Reflection:</strong> Complete reflection at the interface</li>
+                  </ul>
+                </div>
+                
+                <div className="summary-section">
+                  <h5>🌟 Real-World Applications</h5>
+                  <p>Mirrors in telescopes, fiber optic cables for internet, periscopes in submarines, and camera lenses all utilize the principles of light reflection and refraction...</p>
+                </div>
+                
+                <div className="summary-section">
+                  <h5>🔬 Key Formulas</h5>
+                  <div className="formula-list">
+                    <div className="formula-item">n₁sin θ₁ = n₂sin θ₂ (Snell's Law)</div>
+                    <div className="formula-item">Critical angle: θc = sin⁻¹(n₂/n₁)</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="summary-footer">
+                <div className="ai-confidence">
+                  <Brain size={16} />
+                  AI Confidence: 96%
+                </div>
+                <div className="summary-quality">
+                  <Sparkles size={16} />
+                  Quality Score: Excellent
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Recently Generated Summaries */}
+      <Card>
+        <div className="card-header">
+          <h3>Recent Summaries</h3>
+          <Button size="sm" variant="ghost">
+            View All
+          </Button>
+        </div>
+        <div className="recent-items">
+          {recentSummaries.map(item => (
+            <div key={item.id} className="recent-item">
+              <div className="recent-item-info">
+                <div className="recent-item-title">{item.title}</div>
+                <div className="recent-item-meta">
+                  <span>{item.type}</span>
+                  <span>{item.subject}</span>
+                  <span>{item.wordsCount} words</span>
+                  <span>{item.length}</span>
+                  <span>{item.date}</span>
+                </div>
+              </div>
+              <div className="recent-item-status">
+                <span className={`status-badge status-${item.status}`}>
+                  {item.status === 'completed' ? 'Ready' : 'Draft'}
+                </span>
+              </div>
+              <div className="recent-item-actions">
+                <Button size="sm" variant="ghost" icon={<Edit3 size={16} />}>
+                  Edit
+                </Button>
+                <Button size="sm" variant="ghost" icon={<Download size={16} />}>
+                  Export
+                </Button>
+                <Button size="sm" variant="ghost" icon={<Copy size={16} />}>
+                  Copy
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+
   return (
     <div className="ai-tools-page">
       {/* Page Header */}
@@ -568,6 +896,7 @@ const AITools = () => {
         {activeTab === 'question-generator' && renderQuestionGenerator()}
         {activeTab === 'answer-checker' && renderAnswerChecker()}
         {activeTab === 'assignment-creator' && renderAssignmentCreator()}
+        {activeTab === 'chapter-summarizer' && renderChapterSummarizer()}
       </div>
     </div>
   );
