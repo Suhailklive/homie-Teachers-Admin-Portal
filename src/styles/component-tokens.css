@@ -1,0 +1,368 @@
+/* Component Design Tokens */
+/* Specific tokens for UI components */
+
+:root {
+  /* Button Tokens */
+  --btn-height-sm: 32px;
+  --btn-height-md: 40px;
+  --btn-height-lg: 48px;
+  --btn-height-xl: 56px;
+  
+  --btn-padding-x-sm: var(--spacing-md);
+  --btn-padding-x-md: var(--spacing-lg);
+  --btn-padding-x-lg: var(--spacing-xl);
+  
+  --btn-font-size-sm: var(--font-size-sm);
+  --btn-font-size-md: var(--font-size-base);
+  --btn-font-size-lg: var(--font-size-lg);
+  
+  --btn-radius: var(--radius-md);
+  --btn-transition: var(--transition-base);
+  
+  /* Input Tokens */
+  --input-height-sm: 32px;
+  --input-height-md: 40px;
+  --input-height-lg: 48px;
+  
+  --input-padding-x: var(--spacing-md);
+  --input-padding-y: var(--spacing-sm);
+  --input-font-size: var(--font-size-base);
+  --input-radius: var(--radius-md);
+  --input-transition: var(--transition-base);
+  
+  /* Card Tokens */
+  --card-padding: var(--spacing-lg);
+  --card-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-sm);
+  --card-shadow-hover: var(--shadow-md);
+  --card-border: 1px solid var(--card-border);
+  --card-transition: var(--transition-base);
+  
+  /* Modal Tokens */
+  --modal-width-sm: 400px;
+  --modal-width-md: 600px;
+  --modal-width-lg: 800px;
+  --modal-width-xl: 1000px;
+  --modal-radius: var(--radius-lg);
+  --modal-shadow: var(--shadow-xl);
+  --modal-backdrop: rgba(0, 0, 0, 0.5);
+  
+  /* Dropdown Tokens */
+  --dropdown-width-sm: 200px;
+  --dropdown-width-md: 300px;
+  --dropdown-width-lg: 400px;
+  --dropdown-radius: var(--radius-md);
+  --dropdown-shadow: var(--shadow-lg);
+  --dropdown-border: 1px solid var(--border);
+  --dropdown-max-height: 300px;
+  
+  /* Table Tokens */
+  --table-cell-padding: var(--spacing-md);
+  --table-header-bg: var(--gray-50);
+  --table-border: 1px solid var(--border);
+  --table-row-hover: var(--gray-50);
+  --table-radius: var(--radius-lg);
+  
+  /* Badge Tokens */
+  --badge-height: 24px;
+  --badge-padding-x: var(--spacing-sm);
+  --badge-font-size: var(--font-size-xs);
+  --badge-radius: var(--radius-xl);
+  --badge-font-weight: var(--font-weight-medium);
+  
+  /* Progress Tokens */
+  --progress-height: 8px;
+  --progress-height-sm: 4px;
+  --progress-height-lg: 12px;
+  --progress-radius: var(--radius-xl);
+  --progress-bg: var(--gray-200);
+  
+  /* Avatar Tokens */
+  --avatar-size-xs: 24px;
+  --avatar-size-sm: 32px;
+  --avatar-size-md: 40px;
+  --avatar-size-lg: 48px;
+  --avatar-size-xl: 64px;
+  --avatar-size-2xl: 80px;
+  --avatar-radius: 50%;
+  
+  /* Sidebar Tokens */
+  --sidebar-item-height: 48px;
+  --sidebar-item-padding: var(--spacing-md);
+  --sidebar-item-radius: var(--radius-md);
+  --sidebar-item-transition: var(--transition-base);
+  --sidebar-section-spacing: var(--spacing-lg);
+  
+  /* Header Tokens */
+  --header-padding: 0 var(--spacing-lg);
+  --header-border: 1px solid var(--border);
+  --header-shadow: var(--shadow-sm);
+  
+  /* Toast Tokens */
+  --toast-width: 400px;
+  --toast-padding: var(--spacing-lg);
+  --toast-radius: var(--radius-lg);
+  --toast-shadow: var(--shadow-lg);
+  --toast-duration: 5000ms;
+  
+  /* Tooltip Tokens */
+  --tooltip-bg: var(--gray-900);
+  --tooltip-color: var(--white);
+  --tooltip-padding: var(--spacing-xs) var(--spacing-sm);
+  --tooltip-font-size: var(--font-size-xs);
+  --tooltip-radius: var(--radius-sm);
+  --tooltip-shadow: var(--shadow-md);
+  
+  /* Chart Tokens */
+  --chart-grid-color: var(--gray-200);
+  --chart-label-color: var(--text-secondary);
+  --chart-primary-color: var(--primary-blue);
+  --chart-secondary-color: var(--brand-secondary);
+  --chart-accent-color: var(--brand-accent);
+  
+  /* Status Colors */
+  --status-online: #10b981;
+  --status-away: #f59e0b;
+  --status-busy: #ef4444;
+  --status-offline: var(--gray-400);
+  
+  /* Priority Colors */
+  --priority-low: var(--success);
+  --priority-medium: var(--warning);
+  --priority-high: var(--error);
+  --priority-critical: #7c2d12;
+  
+  /* Grade Colors */
+  --grade-a: #10b981;
+  --grade-b: #22c55e;
+  --grade-c: #f59e0b;
+  --grade-d: #ef4444;
+  --grade-f: #dc2626;
+  
+  /* Subject Colors */
+  --subject-math: #3b82f6;
+  --subject-science: #10b981;
+  --subject-english: #8b5cf6;
+  --subject-history: #f59e0b;
+  --subject-art: #ec4899;
+  --subject-pe: #ef4444;
+  --subject-music: #6366f1;
+  
+  /* Engagement Colors */
+  --engagement-high: var(--success);
+  --engagement-medium: var(--warning);
+  --engagement-low: var(--error);
+  
+  /* Performance Colors */
+  --performance-excellent: #10b981;
+  --performance-good: #22c55e;
+  --performance-average: #f59e0b;
+  --performance-poor: #ef4444;
+  
+  /* AI Confidence Colors */
+  --confidence-high: var(--success);
+  --confidence-medium: var(--warning);
+  --confidence-low: var(--error);
+}
+
+/* Component-specific utility classes */
+.btn-height-sm { height: var(--btn-height-sm); }
+.btn-height-md { height: var(--btn-height-md); }
+.btn-height-lg { height: var(--btn-height-lg); }
+
+.input-height-sm { height: var(--input-height-sm); }
+.input-height-md { height: var(--input-height-md); }
+.input-height-lg { height: var(--input-height-lg); }
+
+.avatar-xs {
+  width: var(--avatar-size-xs);
+  height: var(--avatar-size-xs);
+}
+
+.avatar-sm {
+  width: var(--avatar-size-sm);
+  height: var(--avatar-size-sm);
+}
+
+.avatar-md {
+  width: var(--avatar-size-md);
+  height: var(--avatar-size-md);
+}
+
+.avatar-lg {
+  width: var(--avatar-size-lg);
+  height: var(--avatar-size-lg);
+}
+
+.avatar-xl {
+  width: var(--avatar-size-xl);
+  height: var(--avatar-size-xl);
+}
+
+.avatar-2xl {
+  width: var(--avatar-size-2xl);
+  height: var(--avatar-size-2xl);
+}
+
+/* Status indicator classes */
+.status-online { color: var(--status-online); }
+.status-away { color: var(--status-away); }
+.status-busy { color: var(--status-busy); }
+.status-offline { color: var(--status-offline); }
+
+.bg-status-online { background-color: var(--status-online); }
+.bg-status-away { background-color: var(--status-away); }
+.bg-status-busy { background-color: var(--status-busy); }
+.bg-status-offline { background-color: var(--status-offline); }
+
+/* Priority classes */
+.priority-low { color: var(--priority-low); }
+.priority-medium { color: var(--priority-medium); }
+.priority-high { color: var(--priority-high); }
+.priority-critical { color: var(--priority-critical); }
+
+.bg-priority-low { background-color: var(--priority-low); }
+.bg-priority-medium { background-color: var(--priority-medium); }
+.bg-priority-high { background-color: var(--priority-high); }
+.bg-priority-critical { background-color: var(--priority-critical); }
+
+/* Grade classes */
+.grade-a { color: var(--grade-a); }
+.grade-b { color: var(--grade-b); }
+.grade-c { color: var(--grade-c); }
+.grade-d { color: var(--grade-d); }
+.grade-f { color: var(--grade-f); }
+
+/* Subject classes */
+.subject-math { color: var(--subject-math); }
+.subject-science { color: var(--subject-science); }
+.subject-english { color: var(--subject-english); }
+.subject-history { color: var(--subject-history); }
+.subject-art { color: var(--subject-art); }
+.subject-pe { color: var(--subject-pe); }
+.subject-music { color: var(--subject-music); }
+
+/* Performance classes */
+.performance-excellent { color: var(--performance-excellent); }
+.performance-good { color: var(--performance-good); }
+.performance-average { color: var(--performance-average); }
+.performance-poor { color: var(--performance-poor); }
+
+/* Transition utilities */
+.transition-fast { transition: all var(--transition-fast); }
+.transition-base { transition: all var(--transition-base); }
+.transition-slow { transition: all var(--transition-slow); }
+
+/* Focus utilities */
+.focus-ring:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+.focus-ring-inset:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: -2px;
+}
+
+/* Hover utilities */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Loading states */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-200) 25%,
+    var(--gray-100) 50%,
+    var(--gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Pulse animation */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Fade animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Slide animations */
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

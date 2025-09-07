@@ -1,0 +1,60 @@
+/* Confirm Modal Styles */
+
+.confirm-modal {
+  text-align: center;
+}
+
+.confirm-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
+}
+
+.confirm-message {
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+  max-width: 300px;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  width: 100%;
+}
+
+.confirm-modal-actions .btn {
+  min-width: 100px;
+}
+
+/* Icon Styles */
+.icon-danger {
+  color: var(--error);
+}
+
+.icon-success {
+  color: var(--success);
+}
+
+.icon-warning {
+  color: var(--warning);
+}
+
+.icon-info {
+  color: var(--info);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .confirm-modal-actions {
+    flex-direction: column;
+  }
+  
+  .confirm-modal-actions .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachers Portal - Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 240px;
+            background-color: #f3f4f6;
+            border-right: 1px solid #e5e7eb;
+            padding: 1rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: none;
+            background: none;
+            color: #374151;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 0.25rem;
+            transition: all 0.2s ease;
+        }
+        
+        .sidebar-item:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .sidebar-item-primary {
+            background-color: #4F7EF7;
+            color: white;
+        }
+        
+        .sidebar-item-active {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        
+        .header-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #4F7EF7;
+        }
+        
+        .header-navigation {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .select-trigger {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-action-btn {
+            position: relative;
+            padding: 0.5rem;
+            border: none;
+            background: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-content {
+            flex: 1;
+            padding: 2rem;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-subtitle {
+            color: #6b7280;
+            font-size: 1.125rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .stat-icon-blue { background-color: #4F7EF7; }
+        .stat-icon-green { background-color: #10b981; }
+        .stat-icon-purple { background-color: #8b5cf6; }
+        .stat-icon-orange { background-color: #f59e0b; }
+        
+        .stat-title {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .dashboard-card-wide {
+            grid-column: 1 / -1;
+        }
+        
+        .card-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .class-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .class-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .class-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .score-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .score-change {
+            font-size: 0.875rem;
+            margin-left: 0.5rem;
+        }
+        
+        .positive { color: #10b981; }
+        .negative { color: #ef4444; }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-ghost {
+            background: none;
+            color: #4F7EF7;
+            border: 1px solid transparent;
+        }
+        
+        .btn-ghost:hover {
+            background-color: #f0f9ff;
+        }
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <button class="sidebar-item sidebar-item-primary">
+                    <span class="icon">💬</span>
+                    <span>New Chat</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">📚</span>
+                    <span>Practice & Test</span>
+                </button>
+                <button class="sidebar-item sidebar-item-active">
+                    <span class="icon">📊</span>
+                    <span>Classroom Recap</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">💡</span>
+                    <span>Curiosity Centre</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">📖</span>
+                    <span>Library</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Teachers Portal</div>
+                <button class="sidebar-item">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">📄</span>
+                    <span>Assessment & Results</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">🤖</span>
+                    <span>AI Tools</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">🎯</span>
+                    <span>Student Talent</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">🎓</span>
+                    <span>Teacher Training</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">📊</span>
+                    <span>Reports</span>
+                </button>
+                <button class="sidebar-item">
+                    <span class="icon">✉️</span>
+                    <span>Parent Updates</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-section">
+                <button class="sidebar-item">
+                    <span class="icon">👥</span>
+                    <span>Community</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-brand">🏠 Homie AI</div>
+                
+                <div class="header-navigation">
+                    <button class="select-trigger">
+                        <span>Physics</span>
+                        <span>▼</span>
+                    </button>
+                    <button class="select-trigger">
+                        <span>Solar System</span>
+                        <span>▼</span>
+                    </button>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="header-action-btn">
+                        <span class="icon">🔔</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🇮🇳</span>
+                        <button class="select-trigger">
+                            <span>English</span>
+                            <span>▼</span>
+                        </button>
+                    </div>
+                    <button class="select-trigger">
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="width: 32px; height: 32px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</span>
+                            <div style="text-align: left;">
+                                <div style="font-weight: 600; font-size: 0.875rem;">Dr. Sunita Mehta</div>
+                                <div style="font-size: 0.75rem; color: #6b7280;">7th Standard</div>
+                            </div>
+                        </span>
+                        <span>▼</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <main class="page-content">
+                <div class="dashboard-header">
+                    <h1 class="dashboard-title">Teachers Dashboard</h1>
+                    <p class="dashboard-subtitle">Overview of all your classes and student performance</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon stat-icon-blue">👥</div>
+                        </div>
+                        <div class="stat-title">Total Students</div>
+                        <div class="stat-value">142</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon stat-icon-green">📊</div>
+                        </div>
+                        <div class="stat-title">Active Classes</div>
+                        <div class="stat-value">6</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon stat-icon-purple">📈</div>
+                        </div>
+                        <div class="stat-title">Avg Performance</div>
+                        <div class="stat-value">78%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon stat-icon-orange">⭐</div>
+                        </div>
+                        <div class="stat-title">Completion Rate</div>
+                        <div class="stat-value">85%</div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Your Classes -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Your Classes</h3>
+                            <button class="btn btn-ghost">View All</button>
+                        </div>
+                        <div class="card-content">
+                            <div class="class-item">
+                                <div>
+                                    <div class="class-name">Physics - Grade 7A</div>
+                                    <div class="class-meta">28 students • 85% completion</div>
+                                </div>
+                                <div>
+                                    <span class="score-value">78%</span>
+                                    <span class="score-change positive">+5%</span>
+                                </div>
+                            </div>
+                            <div class="class-item">
+                                <div>
+                                    <div class="class-name">Physics - Grade 7B</div>
+                                    <div class="class-meta">25 students • 88% completion</div>
+                                </div>
+                                <div>
+                                    <span class="score-value">82%</span>
+                                    <span class="score-change positive">+3%</span>
+                                </div>
+                            </div>
+                            <div class="class-item">
+                                <div>
+                                    <div class="class-name">Physics - Grade 8A</div>
+                                    <div class="class-meta">30 students • 79% completion</div>
+                                </div>
+                                <div>
+                                    <span class="score-value">75%</span>
+                                    <span class="score-change negative">-2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Performers -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Top Performers</h3>
+                            <button class="btn btn-ghost">View All</button>
+                        </div>
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <span style="font-weight: 600; color: #6b7280;">#1</span>
+                                <span style="width: 40px; height: 40px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</span>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Arjun Sharma</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">96% this week</div>
+                                </div>
+                                <span>⭐</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <span style="font-weight: 600; color: #6b7280;">#2</span>
+                                <span style="width: 40px; height: 40px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</span>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Priya Patel</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">94% this week</div>
+                                </div>
+                                <span>⭐</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <span style="font-weight: 600; color: #6b7280;">#3</span>
+                                <span style="width: 40px; height: 40px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center;">👤</span>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600;">Rahul Gupta</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280;">92% this week</div>
+                                </div>
+                                <span>⭐</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Curiosity Centre Insights -->
+                    <div class="dashboard-card dashboard-card-wide">
+                        <div class="card-header">
+                            <h3 class="card-title">Curiosity Centre Insights</h3>
+                            <button class="btn btn-ghost">View Details</button>
+                        </div>
+                        <div class="card-content">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h4 style="font-weight: 600;">Solar System</h4>
+                                        <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                            <span>⭐</span>
+                                            <span>4.8</span>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Students: 45</span>
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Time: 12h 30m</span>
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: #6b7280;">Completion: 89%</div>
+                                    </div>
+                                    <div style="background: #e5e7eb; border-radius: 0.25rem; height: 8px;">
+                                        <div style="background: #4F7EF7; border-radius: 0.25rem; height: 100%; width: 89%;"></div>
+                                    </div>
+                                </div>
+                                <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h4 style="font-weight: 600;">Light & Optics</h4>
+                                        <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                            <span>⭐</span>
+                                            <span>4.6</span>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Students: 38</span>
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Time: 8h 45m</span>
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: #6b7280;">Completion: 76%</div>
+                                    </div>
+                                    <div style="background: #e5e7eb; border-radius: 0.25rem; height: 8px;">
+                                        <div style="background: #4F7EF7; border-radius: 0.25rem; height: 100%; width: 76%;"></div>
+                                    </div>
+                                </div>
+                                <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                        <h4 style="font-weight: 600;">Motion & Forces</h4>
+                                        <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                            <span>⭐</span>
+                                            <span>4.4</span>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Students: 42</span>
+                                            <span style="font-size: 0.875rem; color: #6b7280;">Time: 10h 15m</span>
+                                        </div>
+                                        <div style="font-size: 0.875rem; color: #6b7280;">Completion: 82%</div>
+                                    </div>
+                                    <div style="background: #e5e7eb; border-radius: 0.25rem; height: 8px;">
+                                        <div style="background: #4F7EF7; border-radius: 0.25rem; height: 100%; width: 82%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
